@@ -3,7 +3,7 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - main
+      - main # আপনার মেইন ব্রাঞ্চের নাম অনুযায়ী পরিবর্তন করতে পারেন
 
 jobs:
   deploy:
@@ -14,21 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # ২. নোড জেএস সেটআপ করা (ক্যাশ বাদ দেওয়া হয়েছে)
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      # ৩. ডিপেন্ডেন্সি ইনস্টল করা (npm ci এর জায়গায় npm i)
-      - name: Install dependencies
-        run: npm install 
-
-      # ৪. প্রোজেক্ট বিল্ড করা
-      - name: Build project
-        run: npm run build
-
-      # ৫. ফায়ারবেস টুলস ইনস্টল ও নির্দিষ্ট সাইট ডেপ্লয় করা
+      # ২. সরাসরি ফায়ারবেস হোস্টিংয়ে ডেপ্লয় করা
       - name: Deploy to Firebase Hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
