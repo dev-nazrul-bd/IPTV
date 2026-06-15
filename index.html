@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IP TV</title>
-    <link rel="icon" type="image/jpeg" href="https://i.ibb.co.com/HTdNjg0k/profile-2.jpg">
+    <title>Dev Nazrul - Personal Sports TV</title>
+    
+    <!-- Video.js CSS -->
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+    
     <style>
-
-  :root {
+        :root {
             --primary-color: #007bff;
             --primary-hover: #0056b3;
             --bg-color: #f4f6f9;
@@ -18,135 +20,490 @@
         }
 
         body {
-            background-color: black;
+            background-color: var(--bg-color);
             color: var(--text-color);
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 0px;
+            padding: px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: ;
+            min-height: 100vh;
         }
 
         /* Profile Section */
-        .profile-container {
+
+
+        /* Main Container */
+
+
+        h2 {
+            color: var(--text-color);
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .selector-box {
+            margin-bottom: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            margin-bottom: 25px;
-            text-align: center;
-          padding-top: 13px;
+            gap: 8px;
         }
 
-        .profile-img {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary-color);
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
-            margin-bottom: 10px;
-            
-        }
-
-        .profile-name {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 5px 0;
-            letter-spacing: 0.5px;
-            color: white;
-        }
-
-
-
-        /* ১. প্রধান কন্টেইনার যা ফ্রেমের বাইরের অংশ কেটে ফেলবে */
-        .iframe-container {
-            width: 100%;
-            height: 1200px; /* আপনার চাহিদামতো মোট হাইট */
-            overflow: hidden; /* স্ক্রলিং বন্ধ রাখবে এবং কাটা অংশ লুকাবে */
-            position: relative;
-            border: none;
-        }
-
-        /* ২. আইফ্রেমের পজিশন এবং নেগেটিভ মার্জিন */
-        .iframe-container iframe {
-            position: absolute;
-            
-            /* টপ মার্জিন মাইনাস (-) করে নেভবারটি উপরে লুকিয়ে ফেলা হয়েছে */
-            /* নেভবারের সাইজ অনুযায়ী এই -70px টি কম-বেশি করতে পারেন */
-            top: -50px; 
-            
-            left: 0;
-            width: 100%;
-            
-            /* হাইট কিছুটা বাড়িয়ে দিতে হবে যাতে নিচের অংশ কেটে না যায় */
-            height: calc(100% + 50px); 
-            
-            border: none;
-        }
-
-
- /* Developer Footer */
-        .developer-footer {
-            margin-top: 40px;
-            text-align: center;
-            padding: 20px;
-            border-top: gray;
-            width: 100%;
-            max-width: 850px;
-        }
-
-        .developer-footer p {
-            margin: 6px 0;
+        label {
             font-size: 14px;
-            color: gray;
+            color: var(--text-muted);
+            font-weight: 600;
         }
 
-        .developer-footer a {
-            color: lightblue;
-            text-decoration: none;
-            font-weight: 500;
+        select {
+            background: #ffffff;
+            color: var(--text-color);
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
         }
-        
-        .developer-footer a:hover {
-            text-decoration: underline;
+
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.15);
         }
+
+        /* Video Player Wrapper */
+        .video-wrapper {
+            position: relative;
+            background-color: #000000;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .video-js {
+            width: 100% !important;
+            aspect-ratio: 16/9;
+        }
+
+        /* Action Buttons */
+        .control-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .fullscreen-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            color: #ffffff;
+            border: none;
+            padding: 12px 30px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .fullscreen-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        .fullscreen-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Developer Footer */
+
     </style>
 </head>
 <body>
 
 
+    <!-- Main Container -->
+    <div class="main-container">
+        <h2>🏆 Live Match Streaming Player</h2>
+        
+        <div class="selector-box">
+            <label for="channelSelect">Select Channel:</label>
+            <select id="channelSelect" onchange="changeChannel()">
+                <!-- BTV-কে ডিফল্ট সিলেক্টেড (selected) করা হয়েছে -->
+                <option value="https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8" selected>BTV (Bangladesh Television)</option>
+                <option value="http://198.195.239.50:8095/tsports/tracks-v1a1/mono.m3u8">T Sports</option>
+                
+                <option value="https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/1080p-vtt/index.m3u8">Caze TV</option>
+                <option value="http://go8knm.optikl.ink/X/index.php/Besyria3/video.m3u8">beIN SPORTS 4k</option>
+                <option value="http://41.205.93.154/STARSPORTS1/index.m3u8">Star Sports 1 HD</option>
+                <option value="https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/bitrate_3.m3u8">REAL MADRID TV</option>
+                <option value="https://bein-esp-xumo.amagi.tv/playlistR1080p.m3u8">BEIN SPORT EXTRA Ñ 🇪🇸</option>
+                <option value="https://bein-esp-xumo.amagi.tv/playlistR720P.m3u8">BEIN SPORT EXTRA Ñ 🇪🇸</option>
+                <option value="https://str2.yodacdn.net/idman_300_to_small/tracks-v1a1/mono.m3u8">IDMANTV 🇹🇷</option>
+                <option value="http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/VCQ4ADX96VH4G8PY7URBWRQU/9155/index.m3u8">SKY SPORTS ACTION</option>
+                <option value="http://179.60.224.196:8000/play/a0i7/index.m3u8">SKY SPORT LALIGA 🇲🇽</option>
+                <option value="http://tv-premium-pro.com/live/wezqqszfr2/i7481xvrdf/280823.m3u8">Hub Sports 2 HD</option>
+                <option value="https://tv.cdn.xsg.ge/gpb-2tv/index.m3u8">2TV Sport 🇳🇴</option>
+                <option value="http://103.175.73.12:8080/live/856/856_0.m3u8">FGN</option>
+                <option value="http://ytoxw6un.ottclub.xyz/iptv/KCUHA6DGYYVA8ZZFUPQV3KZH/18000/index.m3u8">GO 3 sport 1 hd</option>
+                <option value="http://ytoxw6un.ottclub.xyz/iptv/KCUHA6DGYYVA8ZZFUPQV3KZH/18001/index.m3u8">GO 3 sport 2 hd</option>
+                <option value="http://live.balajibroadband.com:3500/live/524.m3u8">SONY LIV</option>
+                <option value="http://live.balajibroadband.com:3500/live/891.m3u8">SONY LIV</option>
+                <option value="http://live.balajibroadband.com:3500/live/155.m3u8">SONY LIV</option>
+                <option value="http://live.balajibroadband.com:3500/live/162.m3u8">SONY LIV</option>
+                <option value="http://live.balajibroadband.com:3500/live/892.m3u8">SONY LIV</option>
+                <option value="https://streamsportixa.ajmainearafat.workers.dev/live.m3u8">Football World Cup 2026 (BIOSCOPE PLUS)</option>
+                <option value="https://qp-pldt-live-bpk-ucd-prod.akamaized.net/bpk-tv/ch299/default/index.mpd">CIGNAL TV</option>
+                <option value="https://otte.live.fly.ww.aiv-cdn.net/gru-nitro/live/clients/dash/enc/ubehitlwzo/out/v1/8e09c381a51f4366a19e979418112e8f/cenc.mpd">DSPORTS FHD</option>
+                <option value="https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8">Caze TV BR</option>
+                <option value="https://d1211whpimeups.cloudfront.net/smil:rtbgo/chunklist.m3u8">Football World Cup 2026 Sky</option>
+                <option value="https://otte-tim.live.pv-cdn.net/pdx-nitro/live/clients/dash/enc/ajfoeddkbz/out/v1/b78800b9b2304879b15843f455836829/cenc.mpd">Football World Cup 2026 (FOX SPORTS)</option>
+                <option value="http://202.70.146.135:8000/play/a06s/index.m3u8">Football World Cup 2026 1</option>
+                <option value="http://ytoxw6un.ottclub.xyz/iptv/KCUHA6DGYYVA8ZZFUPQV3KZH/6408/index.m3u8">Football World Cup 2026 (4K)</option>
+                <option value="http://stalker.hakunamata.workers.dev/play/1100/index.m3u8">PSL 2026 GEO SUPER</option>
+                <option value="https://abfjk4haaaaaaaampv6ofhkihi4r6.bia-cf.live.pv-cdn.net/iad-nitro/live/clients/dash/enc/fdb3pubmek/out/v1/aefca6420f944a9482e117f315de535f/cenc.mpd">FANCODE</option>
+                <option value="https://otte.cache.aiv-cdn.net/iad-nitro/live/clients/dash/enc/fdb3pubmek/out/v1/aefca6420f944a9482e117f315de535f/cenc.mpd">FANCODE</option>
+                <option value="https://otte.live.fly.ww.aiv-cdn.net/sin-nitro/live/clients/dash-sd/enc/v8g0dlo4z8/out/v1/946019f85dc64ae99ff9ce64a9727a62/cenc-sd.mpd">FANCODE</option>
+                <option value="https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/tll6uwepxa/out/v1/a7f67cbb33df46539312956427343886/cenc.mpd">Willow SPORTS</option>
+                <option value="https://otte.live.fly.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/3b7qwiqzk3/out/v1/9f14895badca43e6a716db021dcd0c31/cenc.mpd">Unknown</option>
+                <option value="https://ac-003.live.p7s1video.net/63f8995e/t_003/dazn-fast-hd/cenc-default.mpd">DAZN FAST+</option>
+                <option value="https://dazn-combat-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-dazn-combat-rakuten/CDN/master.m3u8">DAZN COMBAT</option>
+                <option value="https://vodzong.mjunoon.tv:8087/streamtest/SaudiQuran-142/playlist.m3u8">Quran</option>
+                <option value="http://m.live.net.sa:1935/live/quran/playlist.m3u8">Quran</option>
+                <option value="https://tiger-hub.vercel.app@vodzong.mjunoon.tv:8087/streamtest/SaudiSunnah-141/playlist.m3u8">SUNNAH</option>
+                <option value="http://m.live.net.sa:1935/live/sunnah/chunklist.m3u8">SUNNAH</option>
+                <option value="https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8">বিটিভি</option>
+                <option value="http://116.204.149.16/mytv/index.m3u8">মাই টিভি</option>
+                <option value="https://sm-monirul.top/toffee/play/rajdhani_tv.m3u8">RAJDHANI TV</option>
+                <option value="http://41.223.30.230/FOXSPORTS1/index.m3u8">FS1</option>
+                <option value="https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00488-foxdigital-wnyw-lgus/playlist.m3u8">FOX NY</option>
+                <option value="https://linear-702.frequency.stream/dist/stirr/702/hls/master/playlist.m3u8">FOX 11 Green Bay WI (WLUK)</option>
+                <option value="http://190.61.101.11:7050/play/a08v/index.m3u8">FOX Sports 2 [2]</option>
+                <option value="https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD-avc1_1500000=10003-mp4a_96000=20002.m3u8">TVRI Sport (720p)</option>
+                <option value="https://nbculocallive.akamaized.net/hls/live/2037499/puertorico/stream1/master_720.m3u8">Telemundo</option>
+                <option value="https://nbculocallive.akamaized.net/hls/live/2037499/puertorico/stream1/master.m3u8">Telemundo 2</option>
+                <option value="http://23.237.104.106:8080/USA_FOX_DEPORTES/index.m3u8">Fox Deportes</option>
+                <option value="http://23.237.104.106:8080/USA_BEIN/index.m3u8">Bein US</option>
+                <option value="http://23.237.104.106:8080/DAZN_2/index.m3u8">Dazn 2</option>
+                <option value="http://23.237.104.106:8080/DAZN_3/index.m3u8">Dazn 3</option>
+                <option value="http://23.237.104.106:8080/DAZN_4/index.m3u8">Dazn 4</option>
+                <option value="http://23.237.104.106:8080/DAZN_5/index.m3u8">Dazn 5</option>
+                <option value="http://23.237.104.106:8080/DAZN_6/index.m3u8">Dazn 6</option>
+                <option value="http://190.108.83.69:8000/play/a05w/index.m3u8">DSports (Opción 1)</option>
+                <option value="http://148.222.230.201:8000/play/a0pk/index.m3u8">DSports (Opción 2)</option>
+                <option value="http://148.222.230.197:8000/play/a0mm/index.m3u8">DSports (Opción 3)</option>
+                <option value="http://181.64.27.65:8000/play/a0dq/index.m3u8">DSports (Opción 4)</option>
+                <option value="http://38.187.7.252:8000/play/a03d/index.m3u8">DSports (Opción 5)</option>
+                <option value="http://190.223.48.46:8000/play/a028/index.m3u8">DSports (Opción 6)</option>
+                <option value="http://191.97.59.33:8000/play/a09t/index.m3u8">DSports (Opción 7)</option>
+                <option value="http://177.53.152.117:8000/play/a07d/index.m3u8">DSports (Opción 9)</option>
+                <option value="http://8.243.126.131:8000/play/a05a/index.m3u8">DSports (Opción 10)</option>
+                <option value="http://177.10.184.193:8000/play/a0fc/index.m3u8">DSports (Opción 11)</option>
+                <option value="http://217.26.190.76:8888/play/a0co/index.m3u8">DSports (Opción 12)</option>
+                <option value="https://d9ssxzmclhfo4.cloudfront.net/bein_sports720p.m3u8">Bein Xtra (720)</option>
+                <option value="https://d1jzu95oc8fgt3.cloudfront.net/FOX_Sports720p.m3u8">FOX Sports (720)</option>
+                <option value="https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/720p-vtt/index.m3u8">Caze TV (720)</option>
+                <option value="http://24.152.53.3:8090/play/a012/index.m3u8">TUDN</option>
+                <option value="https://otte.live.fly.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/uiffe4jhf0/out/v1/3534efafca8c4815adbb4d2e9a1fe003/cenc.mpd">Fubo Sports 2</option>
+                <option value="https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master_3360.m3u8">Redbull TV</option>
+                <option value="http://41.223.30.230/ESPN2/index.m3u8">NBA</option>
+                <option value="http://88.212.15.19/live/test_ctsport_25p/playlist.m3u8">CT SPORT HD</option>
+                <option value="http://147.135.114.221:8001/play/a00m/index.m3u8">DSports</option>
+                <option value="http://181.78.211.244:8005/play/a0ak/index.m3u8">RCN (Colombia) (🇨🇴)</option>
+                <option value="http://147.135.114.221:8001/play/a00u/index.m3u8">WIN+ (Peru) (🇵🇪)</option>
+                <option value="http://181.78.8.199:8000/play/a0b0/index.m3u8">Caracol</option>
+                <option value="https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/master.m3u8">real Madrid TV</option>
+                <option value="https://7d8dc76d676946ec8d372d4ed7b22333.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-11-CHOPPERTOWN-SPORTSTRIBAL/mt/sportstribaltv/11/hls/master/playlist.m3u8">Choppertown</option>
+                <option value="https://082cdda06abe450a84acd825e814a6b8.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/SportsTribal-eu_Commune-1/playlist.m3u8">Commune</option>
+                <option value="https://d1nj4u39ja4cn0.cloudfront.net/v1/master/9d062541f2ff39b5c0f48b743c6411d25f62fc25/FLS-MuxIP-CricketGold/418.m3u8">Cricket Gold</option>
+                <option value="https://a38d899367d24b1197db60dedfa80262.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-887-DOCUMENTARYINTERNATIONAL-FREELIVESPORTS/mt/freelivesports/887/hls/master/playlist.m3u8">Documentary+</option>
+                <option value="https://a480c1a918694b47b63f7ba07a0f1dc2.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/SportsTribal-eu_DroneTV/playlist.m3u8">Drone TV</option>
+                <option value="https://3100d8a6ad764beb9da3c6ebf285ba1b.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-600-OUTDOORAMERICA-FREELIVESPORTS/mt/freelivesports/600/hls/master/playlist.m3u8">Field &amp; Stream</option>
+                <option value="https://amg00966-amg00966c10-amgplt0201.playout.now3.amagi.tv/playlist/amg00966-amg00966c10-amgplt0201/playlist.m3u8">FIGHT NETWORK</option>
+                <option value="https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01074-fueltv-fueltvemeaen-sportstribal/playlist.m3u8">FUEL TV</option>
+                <option value="https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00585-sportstribaltv-gctv-sportstribal/playlist.m3u8">GCTV</option>
+                <option value="https://3a1b4d927c02473b806350cc162d271f.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-891-GOPRO-FREELIVESPORTS/mt/freelivesports/891/hls/master/playlist.m3u8">GoPro</option>
+                <option value="https://1261a78709344810a5b834d397509879.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-738-H2OTV-SPORTSTRIBALTV/mt/sportstribaltv/738/hls/master/playlist.m3u8">H20 TV</option>
+                <option value="https://d3uyzhwvmemdyf.cloudfront.net/v1/master/9d062541f2ff39b5c0f48b743c6411d25f62fc25/HardKnocks-SportsTribalV2/121.m3u8">Hard Knocks</option>
+                <option value="https://32d0f0785a2a46d28117199f63ad73ea.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/SportsTribal-eu_TheHarlemGlobeTrotters/playlist.m3u8">Harlem Globetrotters</option>
+                <option value="https://hncfree-sportstribal.amagi.tv/hls/amagi_hls_data_sportstri-hncfree-sportstribal/CDN/playlist.m3u8">Horse &amp; Country</option>
+                <option value="http://8.243.126.131:8000/play/a025/index.m3u8">win</option>
+                <option value="http://181.78.17.52:8000/play/a0pw/index.m3u8">Win Sports</option>
+                <option value="http://181.78.71.71:18000/play/a03p/index.m3u8">WIN SPORTS</option>
+                <option value="http://190.60.37.154:45000/play/a00q/index.m3u8">win+</option>
+                <option value="http://190.60.37.154:45000/play/a05a/index.m3u8">TYC</option>
+                <option value="http://190.117.20.37:8000/play/a08d/index.m3u8">DSPORTS 1 🇦🇷</option>
+                <option value="http://205.235.6.29:8000/play/a0pz/index.m3u8">espn premium</option>
+                <option value="http://205.235.6.29:8000/play/a0xa/index.m3u8">tnt sport</option>
+                <option value="http://205.235.6.29:8000/play/a104/index.m3u8">tnt sport premium</option>
+                <option value="http://205.235.6.29:8000/play/a0zf/index.m3u8">espn</option>
+                <option value="http://205.235.6.29:8000/play/a0zv/index.m3u8">espn 7</option>
+                <option value="http://217.26.190.76:8888/play/a06a/index.m3u8">WIN</option>
+                <option value="http://217.26.190.76:8888/play/a0jb/index.m3u8">DSPORTS +</option>
+                <option value="http://38.226.210.46:8000/play/A008/index.m3u8">DSports</option>
+                <option value="http://m3u.tvcluboficial.com/m/m/957.m3u8">TUDN USA</option>
+                <option value="http://m3u.tvcluboficial.com/m/m/1039.m3u8">win sport</option>
+                <option value="http://m3u.tvcluboficial.com/m/m/1042.m3u8">win sports+</option>
+                <option value="https://amg01334-beinsportsllc-beinxtraesp-localnow-aekzc.amagi.tv/playlist.m3u8">BEIN SPORTS Ñ</option>
+                <option value="http://190.60.39.195:8000/play/a0ug/index.m3u8">WIN SPORTS</option>
+                <option value="http://190.7.19.197:232/play/a038/index.m3u8">ESPN PREMIUN 1</option>
+                <option value="http://181.118.158.103:8000/play/a03c/index.m3u8">ESPN 5</option>
+                <option value="http://45.170.130.224:8000/play/a04l/index.m3u8">ESPN ARG</option>
+                <option value="http://190.7.19.197:232/play/a04w/index.m3u8">TYC SPORTS Internacional</option>
+                <option value="http://znty.dyndns.org:5010/hls/eleven1.m3u8">DAZN 1</option>
+                <option value="http://znty.dyndns.org:5010/hls/eleven2.m3u8">DAZN 2</option>
+                <option value="http://znty.dyndns.org:5010/hls/eleven3.m3u8">DAZN 3</option>
+                <option value="http://znty.dyndns.org:5010/hls/eleven4.m3u8">DAZN 4</option>
+                <option value="http://znty.dyndns.org:5010/hls/eleven5.m3u8">DAZN 5</option>
+                <option value="http://69.64.57.208:8080/rti1/playlist.m3u8">RTI 1 (1080p) [Not 24/7]</option>
+                <option value="http://69.64.57.208:8080/rti2/playlist.m3u8">RTI 2 (1080p) [Not 24/7]</option>
+                <option value="https://otte.live.fly.ww.aiv-cdn.net/gru-nitro/live/clients/dash/enc/3ynrpdanq2/out/v1/81fd4c26584044d2b1a1cc5b32fa9af0/cenc.mpd">CAZE TV 2</option>
+                <option value="https://otte.live.fly.ww.aiv-cdn.net/gru-nitro/live/clients/dash/enc/epg9sw6owc/out/v1/e50aecefcb294fae85d6b343e0a6f1cc/cenc.mpd">CAZE TV 3</option>
+                <option value="https://otte.live.fly.ww.aiv-cdn.net/syd-nitro/live/clients/dash/enc/ghwcl6hv68/out/v1/83536910d8034e9b9895a20fbe1c1687/cenc.mpd">BEIN SPORTS 1 AU</option>
+                <option value="https://otte.live.fly.ww.aiv-cdn.net/syd-nitro/live/clients/dash/enc/8m8cd46i1t/out/v1/83985c68e4174e90a58a1f2c024be4c9/cenc.mpd">BEIN SPORTS 2 AU</option>
+                <option value="https://a83aivottlinear-a.akamaihd.net/OTTB/syd-nitro/live/clients/dash/enc/q4u5nwaogz/out/v1/18de6d3e65934f3a8de4358e69eab86c/cenc.mpd">BEIN SPORTS 3 AU</option>
+                <option value="https://andro.226503.xyz/checklist/androstreamlivebs1.m3u8">BEIN Sports 1 1080P</option>
+                <option value="https://andro.226503.xyz/checklist/androstreamlivebs2.m3u8">BEIN Sports 2 1080P</option>
+                <option value="https://andro.226503.xyz/checklist/androstreamlivebs3.m3u8">BEIN Sports 3 1080P</option>
+                <option value="https://andro.226503.xyz/checklist/androstreamlivebs4.m3u8">BEIN Sports 4 1080P</option>
+                <option value="https://andro.226503.xyz/checklist/androstreamlivebs5.m3u8">BEIN Sports 5 1080P</option>
+                <option value="http://181.118.158.103:8000/play/a038/index.m3u8">ESPN</option>
+                <option value="http://181.118.158.103:8000/play/a039/index.m3u8">ESPN 2</option>
+                <option value="http://45.232.210.1:18000/play/a08x/index.m3u8">TNT Sports (Backup)</option>
+                <option value="http://38.226.210.46:8000/play/a05m/index.m3u8">TNT Premium (Principal)</option>
+                <option value="http://181.176.155.7:8090/play/a1vv/index.m3u8">ESPN 2 (Principal)</option>
+                <option value="http://181.118.153.15:8000/play/rq26/index.m3u8">ESPN 7 (Principal)</option>
+                <option value="http://45.5.118.152:8000/play/a08f/index.m3u8">Sky Sport</option>
+                <option value="http://45.167.2.138:8000/play/a0qn/index.m3u8">FOX Sports 3</option>
+                <option value="http://45.5.118.152:8000/play/a0ah/index.m3u8">Claro Sports 2</option>
+                <option value="http://38.226.210.46:8000/play/a06d/index.m3u8">Movistar Deportes</option>
+                <option value="http://181.78.17.52:8000/play/a0rq/index.m3u8">Tigo Sports</option>
+                <option value="http://38.226.49.253:8000/play/a042/index.m3u8">Via X Sport</option>
+                <option value="https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8">Red Bull Tv</option>
+                <option value="http://190.11.225.124:5000/live/espn_2_hd/playlist.m3u8">ESPN 2 Latin (alt)</option>
+                <option value="https://andro.226503.xyz/checklist/androstreamlivebiraz1.m3u8">BEIN SPORTS 1 Turkey</option>
+                <option value="https://andro.okan11gote12sokan.cfd/checklist/androstreamlivebs2.m3u8">BEIN SPORTS 2 Turkey</option>
+                <option value="https://andro.okan11gote12sokan.cfd/checklist/androstreamlivebs3.m3u8">BEIN SPORTS 3 Turkey</option>
+                <option value="https://andro.okan11gote12sokan.cfd/checklist/androstreamlivebs4.m3u8">BEIN SPORTS 4 Turkey</option>
+                <option value="https://video07.logicahost.com.br/rsnews01/rsnews01/playlist.m3u8">RS News</option>
+                <option value="https://video07.logicahost.com.br/rssports01/rssports01/playlist.m3u8">RS Sports 1</option>
+                <option value="https://video07.logicahost.com.br/rssports02/rssports02/playlist.m3u8">RS Sports 2</option>
+                <option value="https://video07.logicahost.com.br/rssports03/rssports03/playlist.m3u8">RS Sports 3</option>
+                <option value="https://video07.logicahost.com.br/rssports04/rssports04/playlist.m3u8">RS Sports 4</option>
+                <option value="https://video03.logicahost.com.br/rssports5/rssports5/playlist.m3u8">RS Sports 5</option>
+                <option value="https://video07.logicahost.com.br/rstv1/rstv1/playlist.m3u8">RS TV</option>
+                <option value="https://video01.logicahost.com.br/rsnewswebtv/rsnewswebtv/playlist.m3u8">RS News Web</option>
+                <option value="https://video03.logicahost.com.br/rspremiere/rspremiere/playlist.m3u8">RS PREMIERE</option>
+                <option value="https://video03.logicahost.com.br/rspremiere2/rspremiere2/playlist.m3u8">RS PREMIERE 2</option>
+                <option value="https://video03.logicahost.com.br/rspremiere3/rspremiere3/playlist.m3u8">RS PREMIERE 3</option>
+                <option value="https://video03.logicahost.com.br/rspremiere4/rspremiere4/playlist.m3u8">RS PREMIERE 4</option>
+                <option value="https://d03ae6b5c6724c24867e97a3dc04934a.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-1026-WORBBRPTFAST-WHALETVPLUS/1026/hls/master/playlist.m3u8">Red Bull TV Brasil</option>
+                <option value="https://db34cc6127ac459db55cab5f97cd66b9.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-680-WORBAUENFAST-WHALETVPLUS/680/whaletvplus/hls/master/playlist.m3u8">Red Bull TV Australia</option>
+                <option value="https://886bd3fbc782459f8de7555d32d7e9ce.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-957-WORBLATAMESFAST-WHALETVPLUS/957/whaletvplus/hls/master/playlist.m3u8">Red Bull TV Espanha</option>
+                <option value="http://45.5.119.43:4000/play/a028/index.m3u8">ESPN 4</option>
+                <option value="http://45.5.119.43:4000/play/a05r/index.m3u8">la liga</option>
+                <option value="http://45.5.119.43:4000/play/a05q/index.m3u8">tudn</option>
+                <option value="http://45.5.119.43:4000/play/a053/index.m3u8">ESPN 2</option>
+                <option value="http://45.171.64.30:2000/play/a08m/index.m3u8">SKY SPORTS GT</option>
+                <option value="http://181.78.85.59:2500/play/a030/index.m3u8">Winsport</option>
+                <option value="http://45.171.64.30:2000/play/a08j/index.m3u8">TUDN</option>
+                <option value="http://38.44.109.41:8003/play/a02l/index.m3u8">TyC Sports</option>
+                <option value="http://45.5.119.43:4000/play/a05t/index.m3u8">TIGO Sports</option>
+                <option value="http://45.5.119.43:4000/play/a024/index.m3u8">Fox SPORTS 3</option>
+                <option value="http://45.5.119.43:4000/play/a05o/index.m3u8">5</option>
+                <option value="http://38.44.109.41:8003/play/a02h/index.m3u8">Gol TV</option>
+                <option value="http://217.26.190.76:8888/play/a0es/index.m3u8">ESPN Premium</option>
+                <option value="http://181.78.49.113:9999/play/a07e/index.m3u8">ESPN 4 HD</option>
+                <option value="http://181.78.49.113:9999/play/a07f/index.m3u8">ESPN 5 HD</option>
+                <option value="https://dto4p9su9kcif.cloudfront.net/out/v1/45b4d7be5ac64a83bdfdca7b683b40b5/index.m3u8">DEPORTE - Eliminatorias Concacaf</option>
+                <option value="https://d29uu6lcvq8u18.cloudfront.net/out/v1/0fc428527c0b4981900340462bc9e390/index.m3u8">DEPORTE - Eliminatorias Concacaf (2)</option>
+                <option value="https://d2cozakhtdw466.cloudfront.net/out/v1/0310eeeafd9a491796b23aec39fad1c4/index.m3u8">DEPORTE - Eliminatorias Concacaf (3)</option>
+                <option value="https://dai.google.com/linear/hls/event/yINISWAPQ0CPhPixe-40wQ/master.m3u8">DEPORTE - Claro Sports</option>
+                <option value="https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00567-estrellamedia-estrellatv-distrotv/playlist.m3u8">DEPORTE - Estrella TV</option>
+                <option value="http://177.10.184.193:8000/play/a0eh/index.m3u8">DEPORTE - SKY SPORTS</option>
+                <option value="https://rmtv.akamaized.net/hls/live/2043154/rmtv-en-web/master.m3u8">🇬🇧 REAL MADRID TV - English (Oficial)</option>
+                <option value="https://dc1644a9jazgj.cloudfront.net/beIN_Sports_Xtra_Espanol1080.m3u8">BEIN SPORTS XTRA</option>
+                <option value="https://dai.google.com/linear/hls/event/_OKWx76jT7mivD6d-25QAw/master.m3u8">CLARO SPORTS</option>
+                <option value="http://151.80.18.177:86/Eurosport_HD/playlist.m3u8">Eurosport 1 (FR)</option>
+                <option value="http://151.80.18.177:86/Eurosport_2_HD/playlist.m3u8">Eurosport 2 (FR)</option>
+                <option value="http://190.11.225.124:5000/live/universo_hd/playlist.m3u8">Mundial NBC Universo</option>
+                <option value="http://38.44.109.41:8003/play/a033/index.m3u8">Mundial Azteca UNO</option>
+                <option value="http://45.189.62.33:8002/play/a0cc/index.m3u8">AZTECA uno</option>
+                <option value="https://estrellatv-roku.amagi.tv/playlist.m3u8">Azteca 7a</option>
+                <option value="https://bein-esp-xumo.amagi.tv/playlist.m3u8">✔️ Bein Sports Xtra ñ *2</option>
+                <option value="http://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master_3360.m3u8">✔️ Red Bull TV</option>
+                <option value="http://190.7.19.197:232/play/a037/index.m3u8">Tango Sports 4</option>
+                <option value="http://wo0dyefk.dienalt.org/iptv/DV3AC2Q6YSR9XE/2558/index.m3u8">5 SPORT 🇮🇱</option>
+                <option value="http://181.78.109.48:9998/play/a06r/index.m3u8">SKY SPORT LALIGA 🇲🇽</option>
+                <option value="http://catchup.videoline.ru/match/tracks-v1a1/mono.m3u8">Матч! 🇷🇺</option>
+                <option value="http://bl.video.matchtv.ru/media/playlist/free_d46d0cf1712c0542ec7fd4f0808f600a_hd/17_89756005/1080/e6bef86de8a133cd7b27deb040758a00/4796141934.m3u8">Матч! 🇷🇺</option>
+                <option value="http://cdntv.online/low/9mlxywika2/48.m3u8">Матч! 🇷🇺</option>
+                <option value="http://191.97.49.82:8001/play/a00m/index.m3u8">ESPN 2 🇦🇷</option>
+                <option value="http://wo0dyefk.dienalt.org/iptv/DV3AC2Q6YSR9XE/2531/index.m3u8">Dazn 1 🇵🇹</option>
+                <option value="http://wo0dyefk.dienalt.org/iptv/DV3AC2Q6YSR9XE/19158/index.m3u8">Dazn 1 🇵🇹</option>
+                <option value="http://wo0dyefk.dienalt.org/iptv/DV3AC2Q6YSR9XE/2532/index.m3u8">Dazn 2 🇵🇹</option>
+                <option value="http://wo0dyefk.dienalt.org/iptv/DV3AC2Q6YSR9XE/7062/index.m3u8">Dazn 3 🇵🇹</option>
+                <option value="http://wo0dyefk.dienalt.org/iptv/DV3AC2Q6YSR9XE/2534/index.m3u8">Dazn 4 🇵🇹</option>
+                <option value="http://wo0dyefk.dienalt.org/iptv/DV3AC2Q6YSR9XE/2535/index.m3u8">Dazn 5 🇵🇹</option>
+                <option value="http://145.239.5.177:80/559/index.m3u8">Bein Sport 3 🇫🇷</option>
+                <option value="http://151.80.18.177:86/Canal+_sport_HD/index.m3u8">CANAL + Sport 🇫🇷</option>
+                <option value="http://cdntv.online/low/9mlxywika2/1021.m3u8">Setenta Sport 1 🇷🇺</option>
+                <option value="http://tv.tuva.ru/machtv/index.m3u8">Матч! 🇷🇺</option>
+                <option value="http://185.46.48.18:80/match/tracks-v1a1/mono.m3u8">Матч! 🇷🇺</option>
+                <option value="http://cdntv.online/low/9mlxywika2/55.m3u8">МАТЧ! ФУТБOЛ 1HD 🇷🇺</option>
+                <option value="http://185.57.68.33:8091/110/playlist.m3u8">Матч! Футбол 3 HD 🇷🇺</option>
+                <option value="http://cdntv.online/low/9mlxywika2/57.m3u8">МАТЧ! ФУТБOЛ 3HD 🇷🇺</option>
+                <option value="http://185.57.68.33:80/110/index.m3u8">Футбол 3 (SD) 🇷🇺</option>
+                <option value="http://217.174.225.146/hls/ch004_720/index.m3u8">Setanta Sport 🇺🇦</option>
+                <option value="http://wo0dyefk.dienalt.org/iptv/DV3AC2Q6YSR9XE/2555/index.m3u8">NOVA SPORT 1 HD 🇨🇿</option>
+                <option value="http://88.212.15.19/live/test_sport1_25p/playlist.m3u8">SPORT 1 HD 🇨🇿</option>
+                <option value="http://88.212.15.19/live/test_sport_2/playlist.m3u8">SPORT 2 HD 🇨🇿</option>
+                <option value="http://88.212.15.19/live/test_arenasport/playlist.m3u8">ARENA SPORT 1 🇨🇿</option>
+                <option value="http://88.212.15.19/live/test_arenasport_dva/playlist.m3u8">ARENA SPORT 2 🇨🇿</option>
+                <option value="http://wo0dyefk.dienalt.org/iptv/DV3AC2Q6YSR9XE/2561/index.m3u8">ZIGGO SPORT 2 HD 🇳🇱</option>
+                <option value="http://wo0dyefk.dienalt.org/iptv/DV3AC2Q6YSR9XE/2559/index.m3u8">ZIGGO SPORT 3 HD 🇳🇱</option>
+                <option value="http://wo0dyefk.dienalt.org/iptv/DV3AC2Q6YSR9XE/2560/index.m3u8">ZIGGO SPORT LIVE 🇳🇱</option>
+                <option value="https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg02873-kravemedia-mtrspt1-distrotv/playlist.m3u8">MTR Sports-1 🇬🇧</option>
+                <option value="http://iptv.prosto.tv:7000/ch109/video.m3u8">X SPORT 🇷🇺</option>
+                <option value="http://217.174.225.146/legacyhls/ch004_720/index.m3u8">Turkmenistan Sport 🇹🇲</option>
+                <option value="https://otte.live.fly.ww.aiv-cdn.net/gru-nitro/live/clients/dash-sd/enc/4yiko4it8k/out/v1/b77dd424c745443aba2f3f88d418f797/cenc-sd.mpd">SPORTV 2</option>
+                <option value="https://otte.live.fly.ww.aiv-cdn.net/gru-nitro/live/clients/dash/enc/6otiglnptp/out/v1/add7499679b0422cb6791f7701f95ecc/cenc.mpd">SPORTV 3</option>
+                <option value="https://otte.live.fly.ww.aiv-cdn.net/iad-nitro/live/clients/dash/enc/tepjqej1ys/out/v1/c9c9159baee749a19612b1598495859a/cenc.mpd">FX SPORTS 2</option>
+                <option value="https://otte.live.fly.ww.aiv-cdn.net/iad-nitro/live/clients/dash/enc/fdx74zqzhu/out/v1/7d7a8c6981a842b98a683e9fbfe51d17/cenc.mpd">FX PREM</option>
+                <option value="http://200.115.120.1:8000/play/ca124/index.m3u8">LIG 🇪🇸</option>
+                <option value="http://cdntv.online/low/9mlxywika2/56.m3u8">МАТЧ! ФУТБOЛ 2HD 🇷🇺</option>
+                <option value="http://czrb8vng.ottclub.xyz/iptv/AHMQNVLWUTM5PW/6554/index.m3u8">OTT CLUB 🇷🇺</option>
+                <option value="http://200.115.120.1:8000/play/ca040/index.m3u8">TNT SPORTS PREMIUM 🇬🇧</option>
+                <option value="http://99.27.51.147:8080/BeinSport/index.m3u8">Bein Sport 1 🇫🇷</option>
+                <option value="http://99.27.51.147:8080/BeinSport3/index.m3u8">Bein Sport 3 🇫🇷</option>
+                <option value="http://cdntv.online/low/9mlxywika2/1022.m3u8">Setenta Sport 2 🇷🇺</option>
+                <option value="https://tva.in.ua/live/susp-sport.m3u8">Суспільне Kiev Спорт HD 🇺🇦</option>
+                <option value="http://200.115.120.1:8000/play/ca016/index.m3u8">TELEFE 🇦🇷</option>
+                <option value="https://alpha.tv.online.tm/legacyhls/ch004_720/index.m3u8">Turkmenistan Sport 🇹🇲</option>
+                <option value="https://amg01370-italiansportcom-sportitalia-rakuten-3hmdb.amagi.tv/amRdirect/ads_pod_type=playerpage_midroll&amp;ads_env=prod&amp;ads_ppid=&amp;ads_rtvid=271861&amp;ads_streaming_id=4f185419-74f6-4564-8ea9-4cdc60746e2f&amp;ads_amagi_channel=781&amp;ads_device_type=web&amp;ads_device_model=&amp;ads_device_year=&amp;ads_player_width=&amp;ads_rtv_content_language=ita&amp;ads_market=it&amp;ads_rtv_content_id=3741&amp;ads_device_make=&amp;ads_user_type=visitor&amp;ads_content_classification=6&amp;ads_gdpr_consent=&amp;ads_device_lmt=1&amp;ads_player_height=&amp;uid=1gnmqg5gu-qsvc-bfo-gaq3-3dgjgexshpe/hls/amagi_hls_data_rakutenAA-sportitalia-rakuten/CDN/1920x1080_4540800/chunklist.m3u8">SPORT ITALIA 🇮🇹</option>
+                <option value="https://livetr.teleromagna.it/mia/live/playlist.m3u8">TR Sport (480p) 🇮🇹</option>
+                <option value="http://212.102.60.80/Infosport/index.m3u8">INFOSPORT 🇫🇷</option>
+                <option value="https://freem3u.xyz/api/live/play.m3u8">ON Sports+ 🇭🇰</option>
+                <option value="http://y3fqd48g.megatv.fun/iptv/NRLXRWSBWBPLN4/19146/index.m3u8">Fox Sports 🇮🇳</option>
+                <option value="http://mmn.mypsx.net:1935/live/mmnhdsport/chunklist.m3u8">MMN Sport 🇸🇦</option>
+                <option value="https://shls-masr-ak.akamaized.net/out/v1/d5036cabf11e45bf9d0db410ca135c18/index.m3u8">MASR 🇶🇦</option>
+                <option value="http://unlimited6-cl.dps.live/sportinghd/sportinghd.smil/playlist.m3u8">TELETRAK 🇨🇱</option>
+                <option value="https://rgelive.akamaized.net/hls/live/2043151/radiolive/playlist.m3u8">Sport5 🇮🇱</option>
+                <option value="https://rgelive.akamaized.net/hls/live/2043095/live3/playlist.m3u8">Sport5 🇮🇱</option>
+                <option value="http://181.118.156.46:8000/play/a04g/index.m3u8">ESPN 🇦🇷</option>
+                <option value="http://200.10.30.241:8000/play/a01r/index.m3u8">ESPN 2 🇨🇴</option>
+                <option value="https://tv91.hostingnuclear.com:19360/xhunestv/xhunestv.m3u8">Azteca 7</option>
+                <option value="https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/1702-audio_113322_eng=113200-video=2202800.m3u8">FIFA World Cup 2026</option>
+                <option value="http://66.102.126.10:8000/play/a022/index.m3u8">FIFA World Cup 2026 🇮🇳[coming]</option>
+                <option value="http://103.157.248.140:8000/play/a01m/index.m3u8">Star Sports 2 Hindi HD (1080p)</option>
+                <option value="https://d36r8jifhgsk5j.cloudfront.net/Willow_TV.m3u8">Willow Sports (1080p)</option>
+                <option value="http://103.157.248.140:8000/play/a00g/index.m3u8">Star Sports 1 Hindi</option>
+                <option value="http://tv-premium-pro.com/live/wezqqszfr2/i7481xvrdf/280824.m3u8">Hub Sports 3 HD</option>
+                <option value="http://tv-premium-pro.com/live/wezqqszfr2/i7481xvrdf/579826.m3u8">Sky Sport1 NZ FHD</option>
+                <option value="http://tv-premium-pro.com/live/wezqqszfr2/i7481xvrdf/579825.m3u8">Sky Sport2 NZ FHD</option>
+                <option value="http://tv-premium-pro.com/live/wezqqszfr2/i7481xvrdf/579824.m3u8">Sky Sport3 NZ FHD</option>
+                <option value="http://tv-premium-pro.com/live/wezqqszfr2/i7481xvrdf/579823.m3u8">Sky Sport4 NZ FHD</option>
+                <option value="http://tv-premium-pro.com/live/wezqqszfr2/i7481xvrdf/579822.m3u8">Sky Sport5 NZ FHD</option>
+                <option value="http://ytoxw6un.ottclub.xyz/iptv/VSQZTL9D68WBD9/6125/index.m3u8">beIN SPORTS 4 HD</option>
+                <option value="http://ytoxw6un.ottclub.xyz/iptv/VSQZTL9D68WBD9/6126/index.m3u8">beIN SPORTS 5 HD</option>
+                <option value="http://190.108.93.75:8001/play/a05d/index.m3u8">TyC SPORTS</option>
+                <option value="https://1nyaler.streamhostingcdn.top/stream/30/index.m3u8">TNT Sports ARG</option>
+                <option value="https://1nyaler.streamhostingcdn.top/stream/84/index.m3u8">TyC Sports ARG</option>
+                <option value="https://amg01416-amg01416c4-firetv-us-4522.playouts.now.amagi.tv/playlist.m3u8">NBC Team USA</option>
+                <option value="https://aym-as.otteravision.com/aym/as/as.m3u8">AYM Sports</option>
+                <option value="https://cdn3.wowza.com/5/ZWQ1K2NYTmpFbGsr/BEK-WOWZA-1/smil:BEKPRIMEW.smil/.m3u8">BEK Sports West (USA)</option>
+                <option value="https://wahyu1ptv.pages.dev/AstroBein2.m3u8">BEIN SPORTS 1 AU</option>
+                <option value="https://wahyu1ptv.pages.dev/AstroBein3.m3u8">BEIN SPORTS 1 AU</option>
+                <option value="https://stream1.sersat.com/hls/garagetv.m3u8">✔️ Garage TV</option>
+                <option value="https://stmv6.voxtvhd.com.br/cnardeportes/cnardeportes/playlist.m3u8">✔️ Xtrema TV Cna Deportes 2</option>
+            </select>
+        </div>
 
-    <!-- Profile Section -->
-    <div class="profile-container">
-        <!-- আপনার অরিজিনাল ছবির নাম এখানে হুবহু বসিয়ে দেওয়া হয়েছে -->
-        <img src="https://i.ibb.co.com/HTdNjg0k/profile-2.jpg" alt="Dev Nazrul" class="profile-img">
-        <div class="profile-name">Md Nazrul Islam</div>
+        <div class="video-wrapper">
+            <video id="live-player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto">
+                <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video.</p>
+            </video>
+        </div>
+
+        <!-- Rotation & Fullscreen Button -->
+        <div class="control-actions">
+            <button class="fullscreen-btn" onclick="goFullScreenAndRotate()">
+                📺 Full Screen (Rotate)
+            </button>
+        </div>
     </div>
-
-
-
-    <div class="iframe-container">
-        <iframe 
-            src="https://tv.asimxtech.online/search" 
-            scrolling="no" 
-            allowfullscreen="true" 
-            webkitallowfullscreen="true" 
-            mozallowfullscreen="true" 
-            allow="fullscreen">
-        </iframe>
-    </div>
-
-
-
 
     <!-- Developer Footer -->
-    <div class="developer-footer">
-        <p><strong>Developer Contact:</strong> Md Nazrul Islam</p>
-        <p><strong>Email:</strong> <a href="mailto:dev.nazrul.bd@gmail.com">dev.nazrul.bd@gmail.com</a></p>
-    </div>
 
+    <!-- Video.js Script -->
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 
+    <script>
+        // Player Initialization
+        var player = videojs('live-player', {
+            fluid: true,
+            autoplay: true,
+            muted: false
+        });
+
+        // Auto play the selected channel on page load
+        window.onload = function() {
+            changeChannel();
+        };
+
+        // Function to change channel stream
+        function changeChannel() {
+            var select = document.getElementById("channelSelect");
+            var streamUrl = select.value;
+            
+            var streamType = 'application/x-mpegURL'; // HLS (.m3u8)
+            if (streamUrl.endsWith('.mpd')) {
+                streamType = 'application/dash+xml'; // DASH (.mpd)
+            }
+
+            player.src({
+                src: streamUrl,
+                type: streamType
+            });
+            player.load();
+            
+            // Trigger Auto Play
+            player.play().catch(function(error) {
+                console.log("Autoplay was prevented by browser. Click play manually.");
+            });
+        }
+
+        // Fullscreen and Landscape Rotation Function
+        function goFullScreenAndRotate() {
+            var playerElement = document.getElementById('live-player');
+            
+            if (playerElement.requestFullscreen) {
+                playerElement.requestFullscreen();
+            } else if (playerElement.mozRequestFullScreen) { /* Firefox */
+                playerElement.mozRequestFullScreen();
+            } else if (playerElement.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                playerElement.webkitRequestFullscreen();
+            } else if (playerElement.msRequestFullscreen) { /* IE/Edge */
+                playerElement.msRequestFullscreen();
+            }
+
+            // Attempt to lock orientation to landscape on mobile devices
+            if (screen.orientation && screen.orientation.lock) {
+                screen.orientation.lock('landscape').catch(function(error) {
+                    console.log("Screen orientation lock is not supported or rejected.");
+                });
+            }
+        }
+    </script>
 </body>
-</html>
+                                                                                                                                   </html>
